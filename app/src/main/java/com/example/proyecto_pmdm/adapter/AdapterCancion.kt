@@ -6,26 +6,35 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_pmdm.R
 import com.example.proyecto_pmdm.models.Cancion
 
-class AdapterCancion(var listCanciones: MutableList<Cancion>) : RecyclerView.Adapter<ViewHCancion>() {
-    /*
-     Método que crea la vista del ViewHolderCancion
-     */
+class AdapterCancion(
+    var listCanciones: MutableList<Cancion>,
+    var deleteOnClick: (Int) -> Unit,
+    var updateOnClick: (Int) -> Unit
+) : RecyclerView.Adapter<ViewHCancion>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHCancion {
         val layoutInflater = LayoutInflater.from(parent.context)
         val layoutItemCancion = R.layout.myrecycledview
-        return ViewHCancion(layoutInflater.inflate(layoutItemCancion, parent, false))
+        return ViewHCancion(
+            layoutInflater.inflate(layoutItemCancion, parent, false)
+        )
     }
 
-    /*
-     Este método debe renderizar todos los datos o propiedades de cada canción con la vista.
-     Accedemos al objeto por medio de la posición.
-     */
     override fun onBindViewHolder(holder: ViewHCancion, position: Int) {
-        holder.renderize(listCanciones[position]) // Renderizamos la vista.
+        val cancion = listCanciones[position]
+        holder.renderize(cancion)
+
+        holder.itemView.setOnClickListener {
+        }
+
+        holder.btnDelete.setOnClickListener {
+            deleteOnClick(position)
+        }
+
+        holder.btnUpdate.setOnClickListener {
+            updateOnClick(position)
+        }
     }
 
-    /*
-     Este método devuelve el número de objetos a representar en el RecyclerView.
-     */
     override fun getItemCount(): Int = listCanciones.size
 }

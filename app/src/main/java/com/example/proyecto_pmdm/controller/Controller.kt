@@ -1,5 +1,7 @@
 package com.example.proyecto_pmdm.controller
 
+import DialogInsertCancion
+import DialogUpdateCancion
 import android.content.Context
 import android.widget.Toast
 import com.example.proyecto_pmdm.MainActivity
@@ -9,13 +11,14 @@ import com.example.proyecto_pmdm.models.Cancion
 
 class Controller(val context: Context) {
     lateinit var listCanciones: MutableList<Cancion>
+    lateinit var adapterCancion: AdapterCancion // Agrega esta línea
 
     init {
         initData()
     }
 
     private fun initData() {
-        listCanciones = DaoCanciones.myDao.getDataHotels().toMutableList() // Llamamos al singleton.
+        listCanciones = DaoCanciones.myDao.getDataCanciones().toMutableList()
     }
 
     fun loggOut() {
@@ -26,8 +29,56 @@ class Controller(val context: Context) {
     }
 
     fun setAdapter() {
-        // Cargamos nuestro AdapterCancion al adapter del RecyclerView
         val myActivity = context as MainActivity
-        myActivity.binding.myRecyclerView.adapter = AdapterCancion(listCanciones)
+        adapterCancion = AdapterCancion(
+            listCanciones,
+            { pos -> delCancion(pos) },
+            { pos -> updateCancion(pos) }
+        )
+        myActivity.binding.myRecyclerView.adapter = adapterCancion
+    }
+    fun updateCancion(position: Int) {
+        if (position in 0 until listCanciones.size) {
+            val existingCancion = listCanciones[position]
+
+            val dialog = DialogUpdateCancion(existingCancion) { updatedCancion ->
+                // Actualiza la canción en la lista
+                listCanciones[position] = updatedCancion
+
+                adapterCancion.notifyItemChanged(position)
+
+                showToast("Se actualizó la canción: ${updatedCancion.title}")
+            }
+
+            val myActivity = context as MainActivity
+            dialog.show(myActivity.supportFragmentManager, "Editar canción")
+        }
+    }
+    fun delCancion(position: Int) {
+        // Verifica si la posición es válida
+        if (position in 0 until listCanciones.size) {
+            val deletedCancion = listCanciones[position]
+
+            listCanciones.removeAt(position)
+
+            adapterCancion.notifyItemRemoved(position)
+
+            showToast("Se eliminó la canción: ${deletedCancion.title}")
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun addCancion() {
+        val dialog = DialogInsertCancion { cancion ->
+            // Logic for adding the song
+            listCanciones.add(listCanciones.size, cancion)
+            adapterCancion.notifyItemInserted(listCanciones.lastIndex)
+        }
+
+        val myActivity = context as MainActivity
+        dialog.show(myActivity.supportFragmentManager, "Añadir nueva canción")
     }
 }
