@@ -22,9 +22,6 @@ class ViewHCancion(view: View) : RecyclerView.ViewHolder(view) {
     init {
         btnDelete.setOnClickListener {
         }
-
-        btnUpdate.setOnClickListener {
-        }
     }
 
 

@@ -32,27 +32,9 @@ class Controller(val context: Context) {
         val myActivity = context as MainActivity
         adapterCancion = AdapterCancion(
             listCanciones,
-            { pos -> delCancion(pos) },
-            { pos -> updateCancion(pos) }
+            { pos -> delCancion(pos) }
         )
         myActivity.binding.myRecyclerView.adapter = adapterCancion
-    }
-    fun updateCancion(position: Int) {
-        if (position in 0 until listCanciones.size) {
-            val existingCancion = listCanciones[position]
-
-            val dialog = DialogUpdateCancion(existingCancion) { updatedCancion ->
-                // Actualiza la canción en la lista
-                listCanciones[position] = updatedCancion
-
-                adapterCancion.notifyItemChanged(position)
-
-                showToast("Se actualizó la canción: ${updatedCancion.title}")
-            }
-
-            val myActivity = context as MainActivity
-            dialog.show(myActivity.supportFragmentManager, "Editar canción")
-        }
     }
     fun delCancion(position: Int) {
         // Verifica si la posición es válida
@@ -71,14 +53,4 @@ class Controller(val context: Context) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
-    fun addCancion() {
-        val dialog = DialogInsertCancion { cancion ->
-            // Logic for adding the song
-            listCanciones.add(listCanciones.size, cancion)
-            adapterCancion.notifyItemInserted(listCanciones.lastIndex)
-        }
-
-        val myActivity = context as MainActivity
-        dialog.show(myActivity.supportFragmentManager, "Añadir nueva canción")
-    }
 }

@@ -9,7 +9,6 @@ import com.example.proyecto_pmdm.models.Cancion
 class AdapterCancion(
     var listCanciones: MutableList<Cancion>,
     var deleteOnClick: (Int) -> Unit,
-    var updateOnClick: (Int) -> Unit
 ) : RecyclerView.Adapter<ViewHCancion>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHCancion {
@@ -31,9 +30,6 @@ class AdapterCancion(
             deleteOnClick(position)
         }
 
-        holder.btnUpdate.setOnClickListener {
-            updateOnClick(position)
-        }
     }
 
     override fun getItemCount(): Int = listCanciones.size

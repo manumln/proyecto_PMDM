@@ -1,25 +1,30 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp">
 
-
-<EditText
+    <EditText
         android:id="@+id/editTextTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Título"
-        android:inputType="text" />
+        android:inputType="text"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:textCursorDrawable="@null" />
 
     <EditText
         android:id="@+id/editTextArtist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextTitle"
-    android:layout_marginTop="8dp"
-    android:hint="Artista"
-    android:inputType="text" />
-
+        android:layout_marginTop="8dp"
+        android:hint="Artista"
+        android:inputType="text"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:textCursorDrawable="@null" />
 
     <EditText
         android:id="@+id/editTextGenre"
@@ -28,7 +33,10 @@
         android:layout_below="@id/editTextArtist"
         android:layout_marginTop="8dp"
         android:hint="Género"
-        android:inputType="text" />
+        android:inputType="text"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:textCursorDrawable="@null" />
 
     <EditText
         android:id="@+id/editTextDuration"
@@ -37,7 +45,10 @@
         android:layout_below="@id/editTextGenre"
         android:layout_marginTop="8dp"
         android:hint="Duración"
-        android:inputType="text" />
+        android:inputType="text"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:textCursorDrawable="@null" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,8 +63,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?android:attr/selectableItemBackground"
-            android:text="Añadir" />
+            android:text="Añadir"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/colorAccent" />
 
         <Button
             android:id="@android:id/button2"
@@ -61,7 +73,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="?android:attr/selectableItemBackground"
-            android:text="Cancelar" />
+            android:text="Cancelar"
+            android:textColor="@color/colorAccent"
+            android:backgroundTint="@android:color/transparent" />
     </LinearLayout>
 </RelativeLayout>

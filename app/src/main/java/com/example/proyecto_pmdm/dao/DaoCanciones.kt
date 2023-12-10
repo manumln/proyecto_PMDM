@@ -1,7 +1,7 @@
 package com.example.proyecto_pmdm.dao
 
 import com.example.proyecto_pmdm.models.Cancion
-import com.example.proyecto_musica_pmdm.objects_models.Repository
+import com.example.proyecto_pmdm.objects_models.Repository
 
 class DaoCanciones private constructor() : InterfaceDao {
     companion object {
