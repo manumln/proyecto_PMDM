@@ -15,14 +15,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        init() // inicializo la clase
+        init()
     }
 
     private fun init() {
         initRecyclerView()
-        controller = Controller(this) // Creamos el controlador
+        controller = Controller(this)
         controller.setAdapter()
-        // controller.loggOut() // Muestro el log en pantalla
     }
 
     private fun initRecyclerView() {
