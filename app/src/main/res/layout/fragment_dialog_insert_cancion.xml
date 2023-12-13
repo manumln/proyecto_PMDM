@@ -11,7 +11,7 @@
         android:hint="Título"
         android:inputType="text"
         android:backgroundTint="@color/colorPrimary"
-        android:textColor="@android:color/white"
+        android:textColor="@color/black"
         android:textCursorDrawable="@null" />
 
     <EditText
@@ -23,7 +23,7 @@
         android:hint="Artista"
         android:inputType="text"
         android:backgroundTint="@color/colorPrimary"
-        android:textColor="@android:color/white"
+        android:textColor="@color/black"
         android:textCursorDrawable="@null" />
 
     <EditText
@@ -35,7 +35,7 @@
         android:hint="Género"
         android:inputType="text"
         android:backgroundTint="@color/colorPrimary"
-        android:textColor="@android:color/white"
+        android:textColor="@color/black"
         android:textCursorDrawable="@null" />
 
     <EditText
@@ -47,34 +47,46 @@
         android:hint="Duración"
         android:inputType="text"
         android:backgroundTint="@color/colorPrimary"
-        android:textColor="@android:color/white"
+        android:textColor="@color/black"
+        android:textCursorDrawable="@null" />
+
+    <EditText
+        android:id="@+id/editTextImageURL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextDuration"
+        android:layout_marginTop="8dp"
+        android:hint="URL de la Imagen"
+        android:inputType="text"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@color/black"
         android:textCursorDrawable="@null" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextDuration"
+        android:layout_below="@id/editTextImageURL"
         android:layout_marginTop="16dp"
         android:orientation="horizontal">
 
         <Button
-            android:id="@android:id/button1"
+            android:id="@+id/buttonAdd"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Añadir"
             android:textColor="@android:color/white"
-            android:backgroundTint="@color/colorAccent" />
+            android:backgroundTint="@color/colorPrimaryDark" />
 
         <Button
-            android:id="@android:id/button2"
+            android:id="@+id/buttonCancel"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cancelar"
-            android:textColor="@color/colorAccent"
-            android:backgroundTint="@android:color/transparent" />
+            android:textColor="@color/colorPrimaryDark"
+            android:backgroundTint="@color/white" />
     </LinearLayout>
 </RelativeLayout>

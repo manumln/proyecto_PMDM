@@ -44,5 +44,30 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this@LoginActivity, "Usuario no registrado o Credenciales incorrectas", Toast.LENGTH_SHORT).show()
             }
         }
+        // ... (existing code)
+
+        validarButton.setOnClickListener {
+            val inputUser = usernameEditText.text.toString()
+            val inputPass = passwordEditText.text.toString()
+
+            if (inputUser == MYUSER && inputPass == MYPASS) {
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                intent.putExtra("USERNAME", inputUser)
+                intent.putExtra("PASSWORD", inputPass)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this@LoginActivity, "Usuario no registrado o Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        val registerFragmentButton: Button = findViewById(R.id.registerFragmentButton)
+        registerFragmentButton.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, RegistrationFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
     }
+
 }

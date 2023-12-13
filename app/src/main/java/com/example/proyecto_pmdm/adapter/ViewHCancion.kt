@@ -1,7 +1,6 @@
 package com.example.proyecto_pmdm.adapter
 
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +8,12 @@ import com.example.proyecto_pmdm.R
 import com.example.proyecto_pmdm.models.Cancion
 import com.bumptech.glide.Glide
 
-class ViewHCancion(view: View) : RecyclerView.ViewHolder(view) {
+class ViewHCancion(
+    view: View,
+    var deleteOnClick: (Int) -> Unit,
+    var updateOnClick: (Int) -> Unit
+) : RecyclerView.ViewHolder(view) {
+
     private val txtviewTitle: TextView = view.findViewById(R.id.txtview_title)
     private val txtviewArtist: TextView = view.findViewById(R.id.txtview_artist)
     private val txtviewGenre: TextView = view.findViewById(R.id.txtview_genre)
@@ -18,12 +22,20 @@ class ViewHCancion(view: View) : RecyclerView.ViewHolder(view) {
     val btnDelete: ImageView = view.findViewById(R.id.btn_delete)
     val btnUpdate: ImageView = view.findViewById(R.id.btn_edit)
 
-
     init {
-        btnDelete.setOnClickListener {
+        itemView.setOnClickListener {
+            // Lógica del clic en el elemento si es necesaria
         }
     }
 
+    private fun setOnClickListener(position: Int) {
+        btnDelete.setOnClickListener {
+            deleteOnClick(position)
+        }
+        btnUpdate.setOnClickListener {
+            updateOnClick(position)
+        }
+    }
 
     fun renderize(cancion: Cancion) {
         txtviewTitle.text = cancion.title
@@ -35,6 +47,7 @@ class ViewHCancion(view: View) : RecyclerView.ViewHolder(view) {
             .load(cancion.imageURL)
             .centerCrop()
             .into(ivCancion)
-    }
 
+        setOnClickListener(adapterPosition)
+    }
 }
