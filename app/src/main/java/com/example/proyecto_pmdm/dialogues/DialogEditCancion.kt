@@ -36,19 +36,18 @@ class DialogEditCancion(
         view.findViewById<EditText>(R.id.editTextDuration).setText(cancionToUpdate.duration)
         view.findViewById<EditText>(R.id.editTextImageURL).setText(cancionToUpdate.imageURL)
 
-        // Set click listeners for the buttons from the XML layout
         view.findViewById<Button>(R.id.buttonAdd).setOnClickListener {
             val updatedCancion = createUpdatedCancionFromInputs(view)
             if (validateInputs(updatedCancion)) {
                 updateCancionDialog(updatedCancion)
-                dismiss() // Close the dialog upon successful update
+                dismiss()
             } else {
                 Toast.makeText(requireActivity(), "Algún campo está vacío", Toast.LENGTH_LONG).show()
             }
         }
 
         view.findViewById<Button>(R.id.buttonCancel).setOnClickListener {
-            dismiss() // Close the dialog
+            dismiss()
         }
 
         return view

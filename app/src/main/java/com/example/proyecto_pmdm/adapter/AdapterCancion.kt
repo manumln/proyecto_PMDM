@@ -26,15 +26,20 @@ class AdapterCancion(
         val cancion = listCanciones[position]
         holder.renderize(cancion)
 
-        holder.itemView.setOnClickListener {
-            // Implementa la lógica que desees cuando se haga clic en el elemento
+        holder.btnUpdate.setOnClickListener {
+            val adapterPosition = holder.adapterPosition
+            if (adapterPosition != RecyclerView.NO_POSITION && adapterPosition < listCanciones.size) {
+                updateOnClick(adapterPosition)
+            }
         }
 
         holder.btnDelete.setOnClickListener {
-            deleteOnClick(position) // Asegúrate de pasar la posición aquí
+            val adapterPosition = holder.adapterPosition
+            if (adapterPosition != RecyclerView.NO_POSITION && adapterPosition < listCanciones.size) {
+                deleteOnClick(adapterPosition)
+            }
         }
     }
-
 
     override fun getItemCount(): Int = listCanciones.size
 }

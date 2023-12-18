@@ -11,8 +11,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var controller: Controller
     lateinit var binding: ActivityMainBinding
 
-    // Elimina la función de acceso generada automáticamente con el nombre `<get-binding>`
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

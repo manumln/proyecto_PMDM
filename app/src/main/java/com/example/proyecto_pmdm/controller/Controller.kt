@@ -1,7 +1,6 @@
 package com.example.proyecto_pmdm.controller
 
 import DialogDeleteCancion
-import DialogNewCancion
 import android.content.Context
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
@@ -9,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.proyecto_pmdm.MainActivity
 import com.example.proyecto_pmdm.adapter.AdapterCancion
 import com.example.proyecto_pmdm.dao.DaoCanciones
+import com.example.proyecto_pmdm.dialogues.DialogAddCancion
 import com.example.proyecto_pmdm.dialogues.DialogEditCancion
 import com.example.proyecto_pmdm.models.Cancion
 
@@ -41,10 +41,12 @@ class Controller(val context: Context) {
     }
 
     private fun delCancion(position: Int) {
+        println("Borrando cancion $position")
         val dialog = DialogDeleteCancion(
             position,
             listCanciones[position].title
         ) { pos ->
+            println("Confirma borrar la cancion $pos")
             okOnDeleteCancion(pos)
             showToast("Se eliminó la canción: ${listCanciones[pos].title}")
         }
@@ -52,14 +54,17 @@ class Controller(val context: Context) {
     }
 
     private fun okOnDeleteCancion(pos: Int) {
+        val removedTitle = listCanciones[pos].title
         listCanciones.removeAt(pos)
         adapterCancion.notifyItemRemoved(pos)
-        showToast("Se eliminó la canción")
+        showToast("Se eliminó la canción: $removedTitle")
+
+        println("Lista después de borrar: $listCanciones")
     }
 
     private fun addCancion() {
         Toast.makeText(context, "Añadiremos una nueva canción", Toast.LENGTH_LONG).show()
-        val dialog = DialogNewCancion { cancion -> okOnNewCancion(cancion) }
+        val dialog = DialogAddCancion { cancion -> okOnNewCancion(cancion) }
         dialog.show((context as FragmentActivity).supportFragmentManager, "Añadimos una nueva canción")
     }
 

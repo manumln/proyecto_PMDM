@@ -3,7 +3,7 @@ package com.example.proyecto_pmdm.objects_models
 import com.example.proyecto_pmdm.models.Cancion
 
 object Repository {
-    val listCanciones: List<Cancion> = listOf(
+    val listCanciones: MutableList<Cancion> = mutableListOf(
         Cancion(
             "positions", "Ariana Grande", "Pop",
             "2:52", "https://upload.wikimedia.org/wikipedia/en/a/a0/Ariana_Grande_-_Positions.png"
@@ -19,6 +19,10 @@ object Repository {
         Cancion(
             "Doin' time", "Lana Del Rey", "Indie",
             "3:22", "https://assets.primaverasound.com/psweb/t3f5kfy1hh7sw5h4ybf0_1616069563060.jpg"
+        ),
+        Cancion(
+            "Cupido", "TINI", "Pop Latino",
+            "2:54", "https://m.media-amazon.com/images/I/613k-Ix6J-L._UF894,1000_QL80_.jpg"
         ),
         Cancion(
             "Roller Coaster", "NMIXX", "K-Pop",

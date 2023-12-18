@@ -1,5 +1,6 @@
 package com.example.proyecto_pmdm
 
+import RegistrationFragment
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -24,6 +25,7 @@ class LoginActivity : AppCompatActivity() {
         val passwordEditText: EditText = findViewById(R.id.passwordEditText)
         val validarButton: Button = findViewById(R.id.validarButton)
         val headerImage: ImageView = findViewById(R.id.headerImage)
+        val registerFragmentButton: Button = findViewById(R.id.registerFragmentButton)
 
         Glide.with(this)
             .asGif()
@@ -35,22 +37,7 @@ class LoginActivity : AppCompatActivity() {
             val inputUser = usernameEditText.text.toString()
             val inputPass = passwordEditText.text.toString()
 
-            if (inputUser == MYUSER && inputPass == MYPASS) {
-                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                intent.putExtra("USERNAME", inputUser)
-                intent.putExtra("PASSWORD", inputPass)
-                startActivity(intent)
-            } else {
-                Toast.makeText(this@LoginActivity, "Usuario no registrado o Credenciales incorrectas", Toast.LENGTH_SHORT).show()
-            }
-        }
-        // ... (existing code)
-
-        validarButton.setOnClickListener {
-            val inputUser = usernameEditText.text.toString()
-            val inputPass = passwordEditText.text.toString()
-
-            if (inputUser == MYUSER && inputPass == MYPASS) {
+            if (estaLogeado(inputUser, inputPass)) {
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 intent.putExtra("USERNAME", inputUser)
                 intent.putExtra("PASSWORD", inputPass)
@@ -60,14 +47,18 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        val registerFragmentButton: Button = findViewById(R.id.registerFragmentButton)
         registerFragmentButton.setOnClickListener {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, RegistrationFragment())
-                .addToBackStack(null)
-                .commit()
+            showRegistrationDialog()
         }
-
     }
 
+    private fun estaLogeado(user: String, pass: String): Boolean {
+        return user == MYUSER && pass == MYPASS
+    }
+
+    // Método para mostrar el diálogo de registro
+    private fun showRegistrationDialog() {
+        val registrationDialog = RegistrationFragment()
+        registrationDialog.show(supportFragmentManager, "RegistrationDialog")
+    }
 }

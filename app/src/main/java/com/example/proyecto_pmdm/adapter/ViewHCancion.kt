@@ -1,6 +1,7 @@
 package com.example.proyecto_pmdm.adapter
 
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -22,9 +23,9 @@ class ViewHCancion(
     val btnDelete: ImageView = view.findViewById(R.id.btn_delete)
     val btnUpdate: ImageView = view.findViewById(R.id.btn_edit)
 
+
     init {
         itemView.setOnClickListener {
-            // Lógica del clic en el elemento si es necesaria
         }
     }
 
@@ -37,6 +38,7 @@ class ViewHCancion(
         }
     }
 
+
     fun renderize(cancion: Cancion) {
         txtviewTitle.text = cancion.title
         txtviewArtist.text = cancion.artist
@@ -47,7 +49,7 @@ class ViewHCancion(
             .load(cancion.imageURL)
             .centerCrop()
             .into(ivCancion)
-
         setOnClickListener(adapterPosition)
     }
 }
+
